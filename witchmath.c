@@ -2,14 +2,17 @@
 #include<stdio.h>
 #include<locale.h>
 #include<math.h>
+const a = 2;
+const b = 7;
+const n = 10000;
 
-
-void rectL();
-void rectR();
-void trap();
-void simpson();
+float rectL(float h);
+float rectR(float h);
+float trap(float h);
+float simpson(float h);
 void secondMenu();
 void thirdMenu();
+void submenu();
 void firstAlg();
 void secondAlg();
 
@@ -53,27 +56,36 @@ void secondMenu() {
 	printf("5. Return to main menu\n");
 
 	int value = getValue(5);
-
+	system("cls");
+	float h = (b - a) / n;
 	switch (value)
 	{
 	case 1:
 	{
-		rectL();
+		float I = rectL(h);
+		printf("Definite integral %f\n", I);
+		submenu();
 		break;
 	}
 	case 2:
 	{
-		rectR();
+		float I = rectR(h);
+		printf("Definite integral %f\n", I);
+		submenu();
 		break;
 	}
 	case 3:
 	{
-		trap();
+		float I = trap(h);
+		printf("Definite integral %f\n", I);
+		submenu();
 		break;
 	}
 	case 4:
 	{
-		simpson();
+		float I = simpson(h);
+		printf("Definite integral %f\n", I);
+		submenu();
 		break;
 	}
 	case 5:
@@ -92,17 +104,19 @@ void thirdMenu() {
 	printf("3. Return to main menu\n");
 
 	int value = getValue(3);
-
+	system("cls");
 	switch (value)
 	{
 	case 1:
 	{
 		firstAlg();
+		submenu();
 		break;
 	}
 	case 2:
 	{
 		secondAlg();
+		submenu();
 		break;
 	}
 	case 3:
@@ -112,6 +126,23 @@ void thirdMenu() {
 	}
 	}
 }
+
+void submenu() {
+	printf("1. Back to main menu\n");
+	printf("2. Exit\n");
+	int value = getValue(2);
+	switch (value)
+	{
+	case 1:
+		mainMenu();
+		break;
+
+	case 2:
+		exit(0);
+		break;
+	}
+}
+
 
 int getValue(int count) {
 	int value;
@@ -124,12 +155,11 @@ int getValue(int count) {
 	return value;
 }
 
-void rectL() {
-	int a = 2, b = 7, n = 10000;
+float rectL(float h) {
 
 	//for (; n < 1000; n+=100){ }
 
-	float h = (float)(b - a) / n;
+	
 	float s = 0, x;
 	x = a;
 	while (x <= (b - h)) {
@@ -137,27 +167,12 @@ void rectL() {
 		x += h;
 	}
 	float I = h * s;
-	printf("Definite integral %f\n", I);
-	printf("1. Back to main menu\n");
-	printf("2. Exit\n");
-	int value = getValue(2);
-	switch (value)
-	{
-	case 1:
-		mainMenu();
-		break;
-
-	case 2:
-		exit(0);
-		break;
-	}
+	return I;
 }
 	
 
-void rectR() {
-	int a = 2, b = 7, n = 10000;
+float rectR(float h) {
 	
-	float h = (float)(b - a) / n;
 	float s = 0, x;
 	
 	x = a + h;
@@ -168,25 +183,11 @@ void rectR() {
 		x += h;
 	}
 	float I = h * s;
-	printf("Definite integral %f\n", I);
-	printf("1. Back to main menu\n");
-	printf("2. Exit\n");
-	int value = getValue(2);
-	switch (value)
-	{
-	case 1:
-		mainMenu();
-		break;
-
-	case 2:
-		exit(0);
-		break;
-	}
+	return I;
 }
 
-void trap() {
-	int a = 2, b = 7, n = 10000;
-	float h = (float)(b - a) / n;
+float trap(float h) {
+	
 	float s = (1/(a + 5) + 1/(b + 5))/2;
 	float x = a + h;
 	while (x <= (b - h))
@@ -196,25 +197,11 @@ void trap() {
 	};
 	
 	float I = h * s;
-	printf("Definite integral %f\n", I);
-	printf("1. Back to main menu\n");
-	printf("2. Exit\n");
-	int value = getValue(2);
-	switch (value)
-	{
-	case 1:
-		mainMenu();
-		break;
-
-	case 2:
-		exit(0);
-		break;
-	}
+	return I;
 }
 
-void simpson() {
-	int a = 2, b = 7, n = 10000;
-	float h = (float)(b - a) / n;
+float simpson(float h) {
+	
 	float s = (1 / (a + 5) + 1 / (b + 5)), s1 = 0, s2 = 0;
 	float x = a + h;
 
@@ -233,23 +220,13 @@ void simpson() {
 	};
 
 	float I = h/3 * (s + 4*s1+2*s2);
-	printf("Definite integral %f\n", I);
-	printf("1. Back to main menu\n");
-	printf("2. Exit\n");
-	int value = getValue(2);
-	switch (value)
-	{
-	case 1:
-		mainMenu();
-		break;
+	return I;	
+}
 
-	case 2:
-		exit(0);
-		break;
-	}
-}
 void firstAlg() {
+
 }
+
 void secondAlg() {
 }
 
